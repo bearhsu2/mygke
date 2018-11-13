@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: hello-server
 spec:
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       creationTimestamp: null
