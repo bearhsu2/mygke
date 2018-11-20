@@ -1,0 +1,38 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kuma-spring
+spec:
+  replicas: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+    type: RollingUpdate
+  minReadySeconds: 10
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: kuma-spring
+    spec:
+      containers:
+      - image: bearhsu2/kuma-spring:2.0.0
+        imagePullPolicy: IfNotPresent
+        name: hello-server
+        ports:
+          - containerPort: 8080
+            protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 20
+          periodSeconds: 5
+          successThreshold: 1
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+
