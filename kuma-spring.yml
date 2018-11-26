@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: kuma-spring
 spec:
-  replicas: 3
+  replicas: 2
   strategy:
     rollingUpdate:
       maxSurge: 2
@@ -17,7 +17,7 @@ spec:
         run: kuma-spring
     spec:
       containers:
-      - image: bearhsu2/kuma-spring:2.0.0
+      - image: bearhsu2/kuma-spring:1.0.0
         imagePullPolicy: IfNotPresent
         name: hello-server
         ports:
